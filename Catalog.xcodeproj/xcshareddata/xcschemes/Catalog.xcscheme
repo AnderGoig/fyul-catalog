@@ -41,17 +41,6 @@
                ReferencedContainer = "container:Catalog.xcodeproj">
             </BuildableReference>
          </TestableReference>
-         <TestableReference
-            skipped = "NO"
-            parallelizable = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "9CECC79D30ACE12400A8DF13"
-               BuildableName = "CatalogUITests.xctest"
-               BlueprintName = "CatalogUITests"
-               ReferencedContainer = "container:Catalog.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction
