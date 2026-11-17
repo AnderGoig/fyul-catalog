@@ -1,0 +1,34 @@
+{
+  "products": [
+    {
+      "id": 8,
+      "title": "Dior J'adore",
+      "price": 89.99,
+      "stock": 98,
+      "availabilityStatus": "In Stock",
+      "category": "fragrances",
+      "thumbnail": "https://cdn.dummyjson.com/product-images/fragrances/dior-j'adore/thumbnail.webp"
+    },
+    {
+      "id": 9,
+      "title": "Dolce Shine Eau de",
+      "price": 69.99,
+      "stock": 4,
+      "availabilityStatus": "Low Stock",
+      "category": "fragrances",
+      "thumbnail": "https://cdn.dummyjson.com/product-images/fragrances/dolce-shine-eau-de/thumbnail.webp"
+    },
+    {
+      "id": 10,
+      "title": "Gucci Bloom Eau de",
+      "price": 79.99,
+      "stock": 91,
+      "availabilityStatus": "In Stock",
+      "category": "fragrances",
+      "thumbnail": "https://cdn.dummyjson.com/product-images/fragrances/gucci-bloom-eau-de/thumbnail.webp"
+    }
+  ],
+  "total": 194,
+  "skip": 7,
+  "limit": 3
+}

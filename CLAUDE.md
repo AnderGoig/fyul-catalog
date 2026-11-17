@@ -5,7 +5,8 @@ merchants who run their business from their phone: browse products, then open on
 
 ## Build and verify
 - Xcode 26.6 (Swift 6.3), Swift 6 language mode, iOS 17.0 deployment target, iPhone only.
-- Build and test: `xcodebuild test -scheme Catalog -destination 'platform=iOS Simulator,name=<an available iPhone>'`.
+- Build and test: `xcodebuild test -scheme Catalog -destination 'platform=iOS Simulator,name=<an available iPhone>' -collect-test-diagnostics never`.
+  Without the flag, a failing test makes `xcodebuild` collect simulator diagnostics for up to 10 minutes.
 - Run the date fixture test on the oldest iOS runtime installed, and check the accessibility
   sizes on the narrowest iPhone available.
 - Before saying something works, build it, run it in the Simulator and look at a screenshot.

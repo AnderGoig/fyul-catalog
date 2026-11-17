@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		9CECC7B030ACE20000A8DF13 /* CatalogKit in Frameworks */ = {isa = PBXBuildFile; productRef = 9CECC7B130ACE20000A8DF13 /* CatalogKit */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		9CECC79530ACE12400A8DF13 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -17,6 +21,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		9CECC7B330ACE20000A8DF13 /* CatalogKit */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = CatalogKit; sourceTree = "<group>"; };
 		9CECC78730ACE11C00A8DF13 /* Catalog.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Catalog.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9CECC79430ACE12400A8DF13 /* CatalogTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CatalogTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -39,6 +44,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9CECC7B030ACE20000A8DF13 /* CatalogKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -55,6 +61,7 @@
 		9CECC77E30ACE11C00A8DF13 = {
 			isa = PBXGroup;
 			children = (
+				9CECC7B330ACE20000A8DF13 /* CatalogKit */,
 				9CECC78930ACE11C00A8DF13 /* Catalog */,
 				9CECC79730ACE12400A8DF13 /* CatalogTests */,
 				9CECC78830ACE11C00A8DF13 /* Products */,
@@ -90,6 +97,7 @@
 			);
 			name = Catalog;
 			packageProductDependencies = (
+				9CECC7B130ACE20000A8DF13 /* CatalogKit */,
 			);
 			productName = Catalog;
 			productReference = 9CECC78730ACE11C00A8DF13 /* Catalog.app */;
@@ -452,6 +460,13 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		9CECC7B130ACE20000A8DF13 /* CatalogKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = CatalogKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 9CECC77F30ACE11C00A8DF13 /* Project object */;
 }
