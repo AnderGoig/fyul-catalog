@@ -3,10 +3,14 @@ import SwiftUI
 
 struct ProductListView: View {
     let viewModel: ProductListViewModel
+    let loader: any ProductLoading
 
     var body: some View {
         content
             .navigationTitle("Products")
+            .navigationDestination(for: ProductSummary.self) { summary in
+                ProductDetailView(summary: summary, loader: loader)
+            }
             .task { await viewModel.loadIfNeeded() }
     }
 
@@ -32,7 +36,9 @@ struct ProductListView: View {
                     }
                 }
                 ForEach(content.products) { product in
-                    ProductRow(product: product)
+                    NavigationLink(value: product) {
+                        ProductRow(product: product)
+                    }
                 }
                 NextPageRow(nextPage: content.nextPage, total: content.total) {
                     viewModel.loadNextPage()

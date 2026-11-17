@@ -3,6 +3,7 @@ import SwiftUI
 
 struct ProductImage: View {
     let url: URL
+    var fallback: URL?
 
     @Environment(\.imageLoader) private var loader
     @State private var loaded: (url: URL, image: UIImage)?
@@ -10,7 +11,7 @@ struct ProductImage: View {
 
     var body: some View {
         ZStack {
-            if let image = loadedImage ?? loader?.cachedImage(for: url) {
+            if let image = loadedImage ?? cachedImage(for: url) ?? fallback.flatMap(cachedImage) {
                 Image(uiImage: image)
                     .resizable()
                     .scaledToFit()
@@ -26,6 +27,10 @@ struct ProductImage: View {
 
     private var loadedImage: UIImage? {
         loaded?.url == url ? loaded?.image : nil
+    }
+
+    private func cachedImage(for url: URL) -> UIImage? {
+        loader?.cachedImage(for: url)
     }
 
     private func load() async {

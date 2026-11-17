@@ -23,7 +23,7 @@ struct ProductRow: View {
                 Text(product.price, format: .catalogPrice)
                 StockStatusLabel(status: product.availabilityStatus, stock: product.stock)
                     .font(.subheadline)
-                Text(product.category.replacing("-", with: " ").localizedCapitalized)
+                Text(product.category.categoryTitle)
                     .font(.subheadline)
                     .foregroundStyle(.secondary)
             }
