@@ -21,6 +21,14 @@ struct DecodingTests {
         #expect(lowStock.thumbnail.lastPathComponent == "thumbnail.webp")
     }
 
+    @Test func unknownAvailabilityStatusDecodesAsSent() throws {
+        let json = Data(#""Discontinued""#.utf8)
+
+        let status = try APIClient.makeDecoder().decode(AvailabilityStatus.self, from: json)
+
+        #expect(status == .other("Discontinued"))
+    }
+
     @Test func productDecodesTheDetailFields() throws {
         let product = try APIClient.makeDecoder().decode(Product.self, from: Fixture.data("product-1-with-brand"))
 

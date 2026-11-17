@@ -1,0 +1,52 @@
+{
+  "sourceLanguage": "en",
+  "strings": {
+    "%@ · %lld": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "new",
+            "value": "%1$@ · %2$lld"
+          }
+        }
+      }
+    },
+    "%lld products": {
+      "localizations": {
+        "en": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld product"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld products"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "Can't Reach the Catalog": {},
+    "Check your connection and try again.": {},
+    "Couldn't load more products.": {},
+    "Couldn't refresh. Showing earlier results.": {},
+    "In Stock": {},
+    "Low Stock": {},
+    "No Products": {},
+    "Out of Stock": {},
+    "Products": {},
+    "Retry": {},
+    "Something Went Wrong": {},
+    "Try Again": {},
+    "Try again in a moment.": {},
+    "Your catalog has no products yet.": {}
+  },
+  "version": "1.0"
+}

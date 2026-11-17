@@ -38,7 +38,8 @@ Agreed on 2026-11-17. Each says what we do, what we didn't do, and why. `NOTES.m
   catches up on refresh.
 - **Images: our own `ImageLoader`, in CatalogKit.** URLSession plus an `NSCache` of decoded
   images, cost limit about 50 MB, memory only. The CDN sends `no-store`, so URLCache won't store
-  images and AsyncImage would download them again on scroll-back (to confirm in slice 2).
+  images, and AsyncImage would download them again on scroll-back (inferred from the header; we
+  never built the AsyncImage version).
   Holding images for the session is our call, never on disk. Views read
   the cache synchronously, so cached images don't flash the placeholder. Cancellation never shows
   as failure. No downsampling (300 px thumbnails, 1000 px photos). `ProductImage` in the app owns
@@ -63,10 +64,12 @@ Agreed on 2026-11-17. Each says what we do, what we didn't do, and why. `NOTES.m
   function runs on its caller's actor.
 - **Product.**
   - List row: thumbnail, title, price, stock status with count, category. No rating.
-  - Detail: images, price with "x% off", stock status and count, minimum order quantity, SKU,
-    barcode, category, brand when present, description, shipping, warranty, return policy, then
-    rating and reviews. No weight or dimensions: they have no units and look random.
+  - Detail: the first image (no gallery in v1), price with "x% off", stock status and count,
+    minimum order quantity, SKU, barcode, category, brand when present, description, shipping,
+    warranty, return policy, then rating and reviews. No weight or dimensions: they have no units
+    and look random.
   - Stock status is shown as the API sends it, as text plus an icon, never derived from the count.
+    A status we don't know decodes as `.other` and shows as sent, instead of failing the page.
   - `price` is before the discount. No computed sale price in v1, to keep money math out of
     `Double`.
   - Currency is a fixed USD constant, formatted in the user's locale, never
