@@ -1,0 +1,26 @@
+# Xcode user state and build products
+xcuserdata/
+DerivedData/
+build/
+*.xcresult
+*.xcscmblueprint
+*.xccheckout
+*.moved-aside
+*.hmap
+*.ipa
+*.dSYM
+*.dSYM.zip
+timeline.xctimeline
+playground.xcworkspace
+
+# Swift Package Manager
+.build/
+
+# macOS
+.DS_Store
+
+# Local working notes (the README's AI section is written from these)
+NOTES.md
+
+# Per-machine Claude Code settings (local plugin toggles, permissions)
+.claude/settings.local.json
