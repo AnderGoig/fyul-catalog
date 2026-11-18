@@ -134,6 +134,8 @@ Agreed on 2026-11-17. Each says what we do, what we didn't do, and why. `NOTES.m
 ## Working agreement
 - Make small commits, one slice each, with a message that says why. Where TDD applies, each test
   is seen failing before the code that passes it, and both land in the slice's commit.
+- Any commit whose code contradicts `CLAUDE.md` also updates `CLAUDE.md`, so the file always
+  describes the code as it is.
 - Each time a suggestion is accepted, changed or rejected, add one line to `NOTES.md`
   (gitignored) saying why. The README's AI section is written from it.
 - Ask before adding a dependency, a new layer, or a feature that isn't in the plan.
