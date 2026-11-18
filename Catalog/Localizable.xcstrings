@@ -82,6 +82,15 @@
     "In Stock" : {
 
     },
+    "Loading details" : {
+
+    },
+    "Loading more products" : {
+
+    },
+    "Loading products" : {
+
+    },
     "Low Stock" : {
 
     },
@@ -101,6 +110,9 @@
 
     },
     "Products" : {
+
+    },
+    "Reload" : {
 
     },
     "Retry" : {

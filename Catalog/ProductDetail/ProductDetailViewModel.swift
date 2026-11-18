@@ -33,3 +33,10 @@ final class ProductDetailViewModel {
         }
     }
 }
+
+extension ProductDetailViewModel.State {
+    var product: Product? {
+        guard case .loaded(let product) = self else { return nil }
+        return product
+    }
+}

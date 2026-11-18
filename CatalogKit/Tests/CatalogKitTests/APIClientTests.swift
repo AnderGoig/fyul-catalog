@@ -2,7 +2,7 @@ import Foundation
 import Testing
 @testable import CatalogKit
 
-@Suite("APIClient")
+@Suite("APIClient", .tags(.networking))
 struct APIClientTests {
     @Test func pageRequestsTheListFieldsForThatPage() async throws {
         let log = RequestLog()

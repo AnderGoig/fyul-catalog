@@ -221,6 +221,25 @@ struct ProductListViewModelTests {
         #expect(viewModel.state.nextPage == .idle)
     }
 
+    @Test func nextPageDoesNotStartWhileARefreshRuns() async {
+        let gate = Gate()
+        let loader = FakeProductLoader(pages: [
+            { .stub(ids: 1...30, skip: 0, total: 194) },
+            { await gate.wait(); return .stub(ids: 101...130, skip: 0, total: 194) },
+        ])
+        let viewModel = ProductListViewModel(loader: loader)
+        await viewModel.loadIfNeeded()
+        let refresh = Task { await viewModel.refresh() }
+        await gate.waitForArrival()
+
+        let page = viewModel.loadNextPage()
+        await gate.open()
+        await refresh.value
+
+        #expect(page == nil)
+        #expect(await loader.requestedSkips == [0, 0])
+    }
+
     @Test func cancelledPageIsNotAnError() async {
         let loader = FakeProductLoader(pages: [
             { .stub(ids: 1...30, skip: 0, total: 194) },

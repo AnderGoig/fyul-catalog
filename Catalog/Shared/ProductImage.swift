@@ -43,7 +43,3 @@ struct ProductImage: View {
         }
     }
 }
-
-extension EnvironmentValues {
-    @Entry var imageLoader: ImageLoader?
-}

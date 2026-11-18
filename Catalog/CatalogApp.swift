@@ -8,9 +8,12 @@ struct CatalogApp: App {
     private let imageLoader: ImageLoader
 
     init() {
+        guard let baseURL = URL(string: "https://dummyjson.com") else {
+            fatalError("The DummyJSON base URL is not a valid URL.")
+        }
         let session = URLSession.shared
         client = APIClient(
-            baseURL: URL(string: "https://dummyjson.com")!,
+            baseURL: baseURL,
             session: session,
             requestAdapter: Self.debugRequestAdapter()
         )

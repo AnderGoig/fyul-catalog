@@ -36,20 +36,3 @@ final class StubURLProtocol: URLProtocol {
 
     override func stopLoading() {}
 }
-
-final class RequestLog: Sendable {
-    private let storage = OSAllocatedUnfairLock<[URLRequest]>(initialState: [])
-
-    var requests: [URLRequest] { storage.withLock { $0 } }
-
-    func record(_ request: URLRequest) {
-        storage.withLock { $0.append(request) }
-    }
-}
-
-extension HTTPURLResponse {
-    static func stub(for request: URLRequest, status: Int = 200) throws -> HTTPURLResponse {
-        let url = try #require(request.url)
-        return try #require(HTTPURLResponse(url: url, statusCode: status, httpVersion: nil, headerFields: nil))
-    }
-}

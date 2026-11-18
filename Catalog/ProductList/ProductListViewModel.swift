@@ -35,6 +35,7 @@ final class ProductListViewModel {
     private(set) var state: State = .loading
     private let loader: any ProductLoading
     private var pageTask: Task<Void, Never>?
+    private var isRefreshing = false
 
     init(loader: any ProductLoading) {
         self.loader = loader
@@ -52,6 +53,8 @@ final class ProductListViewModel {
 
     func refresh() async {
         cancelPageInFlight()
+        isRefreshing = true
+        defer { isRefreshing = false }
         do {
             let page = try await loader.page(skip: 0, limit: Self.pageSize)
             state = Self.state(forFirstPage: page)
@@ -65,7 +68,7 @@ final class ProductListViewModel {
 
     @discardableResult
     func loadNextPage() -> Task<Void, Never>? {
-        guard case .loaded(var content) = state else { return nil }
+        guard !isRefreshing, case .loaded(var content) = state else { return nil }
         switch content.nextPage {
         case .idle, .failed: break
         case .loading, .complete: return nil

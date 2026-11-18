@@ -3,7 +3,7 @@ import Testing
 @testable import CatalogKit
 
 @MainActor
-@Suite("ImageLoader")
+@Suite("ImageLoader", .tags(.networking))
 struct ImageLoaderTests {
     @Test func responseThatIsNotAnImageThrows() async throws {
         let (session, baseURL) = try StubURLProtocol.makeSession { request in
@@ -12,7 +12,7 @@ struct ImageLoaderTests {
         let loader = ImageLoader(session: session)
         let url = baseURL.appending(path: "thumbnail.webp")
 
-        await #expect(throws: (any Error).self) {
+        await #expect(throws: URLError.self) {
             try await loader.image(for: url)
         }
         #expect(loader.cachedImage(for: url) == nil)
