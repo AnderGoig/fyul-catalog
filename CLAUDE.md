@@ -28,8 +28,9 @@ Agreed on 2026-11-17. Each says what we do, what we didn't do, and why. `NOTES.m
 - **List loading: paging.** `limit=30` with `skip`; the next page loads when the bottom row
   appears. Not one `limit=0` call: a real merchant catalog has no upper bound and production APIs
   cap page size. The bottom row shows the spinner, "Couldn't load more" with Retry, and the
-  product count at the end. Skip ids already loaded; a refresh cancels the page in flight.
-  Search, category filter and sort go to the server, never filtering the loaded pages.
+  product count at the end. Skip ids already loaded; a refresh cancels the page in flight, and no
+  page starts while a refresh runs. Search, category filter and sort go to the server, never
+  filtering the loaded pages.
 - **List payload: summary first, then detail.** Pages
   `select=title,price,stock,availabilityStatus,category,thumbnail` into `ProductSummary`. Detail
   shows the summary at once and fetches `/products/{id}` into `Product`. Not for size (a full page
@@ -42,9 +43,10 @@ Agreed on 2026-11-17. Each says what we do, what we didn't do, and why. `NOTES.m
   never built the AsyncImage version).
   Holding images for the session is our call, never on disk. Views read
   the cache synchronously, so cached images don't flash the placeholder. Cancellation never shows
-  as failure. No downsampling (300 px thumbnails, 1000 px photos). `ProductImage` in the app owns
-  placeholder, failure and VoiceOver. No Kingfisher or Nuke until we need a disk cache,
-  prefetching or downsampling.
+  as failure. No downsampling (300 px thumbnails, 1000 px photos). `ProductImage` owns the
+  placeholder and the failure state. Callers hide it from VoiceOver, because the row or header next
+  to it already names the product. No Kingfisher or Nuke until we need a disk cache, prefetching
+  or downsampling.
 - **Errors.** `APIError`: `network` (any `URLError` except cancelled), `server(status:)`,
   `notFound` (404), `decoding`. `URLError.cancelled` becomes `CancellationError`, which view
   models ignore. A refresh never goes back to `.loading`, because replacing the List cancels
@@ -124,13 +126,14 @@ Agreed on 2026-11-17. Each says what we do, what we didn't do, and why. `NOTES.m
   the empty and error states.
 - Support Dynamic Type up to the accessibility sizes: rows reflow and nothing gets silently cut
   off.
-- Put VoiceOver labels on rows and images, and support light and dark mode.
+- Put VoiceOver labels on rows, and hide product images that sit next to the product's name.
+  Support light and dark mode.
 - Never show stock status with colour alone.
 - Format prices with `FormatStyle`, and keep every user-facing string in a String Catalog.
 
 ## Working agreement
-- Make small commits, one slice each, with a message that says why. Where TDD applies, the test
-  lands before the code that passes it.
+- Make small commits, one slice each, with a message that says why. Where TDD applies, each test
+  is seen failing before the code that passes it, and both land in the slice's commit.
 - Each time a suggestion is accepted, changed or rejected, add one line to `NOTES.md`
   (gitignored) saying why. The README's AI section is written from it.
 - Ask before adding a dependency, a new layer, or a feature that isn't in the plan.
