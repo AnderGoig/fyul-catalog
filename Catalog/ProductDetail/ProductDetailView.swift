@@ -110,9 +110,10 @@ private struct ProductDetailSections: View {
                 Spacer()
                 HStack(spacing: 4) {
                     Image(systemName: "star.fill")
-                        .accessibilityHidden(true)
                     Text(product.rating, format: .number.precision(.fractionLength(1)))
                 }
+                .accessibilityElement(children: .ignore)
+                .accessibilityLabel(Text("Average rating \(product.rating.formatted(.number.precision(.fractionLength(1))))"))
             }
         }
     }

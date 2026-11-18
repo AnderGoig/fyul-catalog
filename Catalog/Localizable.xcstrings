@@ -14,6 +14,16 @@
         }
       }
     },
+    "%@, quantity %lld" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@, quantity %2$lld"
+          }
+        }
+      }
+    },
     "%lld out of 5" : {
 
     },
@@ -38,6 +48,9 @@
           }
         }
       }
+    },
+    "Average rating %@" : {
+
     },
     "Barcode" : {
 

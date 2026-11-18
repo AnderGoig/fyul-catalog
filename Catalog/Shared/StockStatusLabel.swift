@@ -12,6 +12,8 @@ struct StockStatusLabel: View {
             Text("\(title) · \(stock)")
         }
         .foregroundStyle(tint)
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel(Text("\(title), quantity \(stock)"))
     }
 
     private var title: String {

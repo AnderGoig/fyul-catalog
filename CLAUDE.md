@@ -102,8 +102,8 @@ Agreed on 2026-11-17. Each says what we do, what we didn't do, and why. `NOTES.m
   has units.
 - Images on `cdn.dummyjson.com` are WebP (300×300 thumbnails, 1000×1000 photos). Images and API
   responses both come with `Cache-Control: no-store`.
-- `?delay=3000` slows any response, and `/http/<code>` returns that status (checked with 404,
-  500 and 503). Use them to check the slow and failed states by hand.
+- `?delay=3000` slows any response, up to 5000 ms (more returns 400), and `/http/<code>` returns
+  that status (checked with 404, 500 and 503). Use them to check the slow and failed states by hand.
 - Also available: `/products/search?q=`, `/products/categories`, `/products/category/{slug}`,
   the `sortBy` and `order` params, and `PUT /products/{id}`. The PUT is simulated: it returns
   the updated product but saves nothing.

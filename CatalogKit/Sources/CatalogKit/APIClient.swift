@@ -6,10 +6,16 @@ public struct APIClient: Sendable {
 
     private let baseURL: URL
     private let session: URLSession
+    private let requestAdapter: (@Sendable (URLRequest) -> URLRequest)?
 
-    public init(baseURL: URL, session: URLSession) {
+    public init(
+        baseURL: URL,
+        session: URLSession,
+        requestAdapter: (@Sendable (URLRequest) -> URLRequest)? = nil
+    ) {
         self.baseURL = baseURL
         self.session = session
+        self.requestAdapter = requestAdapter
     }
 
     public func page(skip: Int, limit: Int) async throws -> ProductPage {
@@ -26,7 +32,7 @@ public struct APIClient: Sendable {
     }
 
     @concurrent private func send<Response: Decodable & Sendable>(_ request: URLRequest) async throws -> Response {
-        var request = request
+        var request = requestAdapter?(request) ?? request
         request.timeoutInterval = 15
         let data: Data
         let response: URLResponse

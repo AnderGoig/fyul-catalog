@@ -9,9 +9,21 @@ struct CatalogApp: App {
 
     init() {
         let session = URLSession.shared
-        client = APIClient(baseURL: URL(string: "https://dummyjson.com")!, session: session)
+        client = APIClient(
+            baseURL: URL(string: "https://dummyjson.com")!,
+            session: session,
+            requestAdapter: Self.debugRequestAdapter()
+        )
         imageLoader = ImageLoader(session: session)
         _listViewModel = State(initialValue: ProductListViewModel(loader: client))
+    }
+
+    private static func debugRequestAdapter() -> (@Sendable (URLRequest) -> URLRequest)? {
+        #if DEBUG
+        DebugNetworkSwitches().makeAdapter()
+        #else
+        nil
+        #endif
     }
 
     var body: some Scene {

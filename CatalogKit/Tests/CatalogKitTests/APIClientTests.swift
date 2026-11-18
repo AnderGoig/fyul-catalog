@@ -53,6 +53,23 @@ struct APIClientTests {
         #expect(log.requests.map(\.timeoutInterval) == [15, 15])
     }
 
+    @Test func requestAdapterChangesTheRequestBeforeItIsSent() async throws {
+        let log = RequestLog()
+        let (session, baseURL) = try StubURLProtocol.makeSession { request in
+            log.record(request)
+            return (try .stub(for: request), try Fixture.data("product-1-with-brand"))
+        }
+        let client = APIClient(baseURL: baseURL, session: session) { request in
+            var request = request
+            request.url = request.url?.appending(queryItems: [URLQueryItem(name: "delay", value: "3000")])
+            return request
+        }
+
+        _ = try await client.product(id: 1)
+
+        #expect(log.requests.first?.url?.query() == "delay=3000")
+    }
+
     @Test func notFoundStatusThrowsNotFound() async throws {
         let (session, baseURL) = try StubURLProtocol.makeSession { request in
             (try .stub(for: request, status: 404), try Fixture.data("not-found-9999"))
